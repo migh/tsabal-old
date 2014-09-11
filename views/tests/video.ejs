@@ -1,0 +1,95 @@
+<h1>This is a test with getUserMedia video!</h1>
+<video id="video"></video>
+<canvas id="canvas" width="640" height="480"></canvas>
+<script>
+    (function() {
+
+        var streaming = false,
+                video        = document.querySelector('#video'),
+                canvas       = document.querySelector('#canvas'),
+                photo        = document.querySelector('#photo'),
+                startbutton  = document.querySelector('#startbutton'),
+                width = 320,
+                height = 0;
+
+        navigator.getMedia = ( navigator.getUserMedia ||
+                navigator.webkitGetUserMedia ||
+                navigator.mozGetUserMedia ||
+                navigator.msGetUserMedia);
+
+        navigator.getMedia(
+                {
+                    video: true,
+                    audio: false
+                },
+                function(stream) {
+                    if (navigator.mozGetUserMedia) {
+                        video.mozSrcObject = stream;
+                    } else {
+                        var vendorURL = window.URL || window.webkitURL;
+                        video.src = vendorURL.createObjectURL(stream);
+                    }
+                    video.play();
+                },
+                function(err) {
+                    console.log("An error occured! " + err);
+                }
+        );
+
+        function getImage(){
+
+            var i, r, g, b, v;
+            var context = canvas.getContext('2d');
+
+            try {
+
+                context.drawImage(video,0,0,640,480);
+
+                /* Block for modify content */
+
+                var frame = context.getImageData(0, 0, 640, 480);
+                var l = frame.data.length / 4;
+
+                for (i = 0; i < l; i++) {
+                    r = frame.data[i * 4 + 0];
+                    g = frame.data[i * 4 + 1];
+                    b = frame.data[i * 4 + 2];
+
+                    if ((i%32) < 16) {
+                        // For desaturate
+                        v = 0.2126*r + 0.7152*g + 0.0722*b;
+                        frame.data[i * 4 + 0] = frame.data[i * 4 + 1] = frame.data[i * 4 + 2] = v;
+                    }else{
+                        // For invert
+                        frame.data[i * 4 + 0] = 255 - frame.data[i * 4 + 0];
+                        frame.data[i * 4 + 1] = 255 - frame.data[i * 4 + 1];
+                        frame.data[i * 4 + 2] = 255 - frame.data[i * 4 + 2];
+                    }
+
+                }
+
+                context.putImageData(frame, 0, 0);
+
+                /* Block for modify content */
+
+                setTimeout(function () {
+                    getImage();
+                }, 0);
+
+            } catch (e) {
+                if (e.name == "NS_ERROR_NOT_AVAILABLE") {
+                    // Wait a bit before trying again; you may wish to change the
+                    // length of this delay.
+                    setTimeout(getImage, 100);
+                } else {
+                    throw e;
+                }
+            }
+        }
+
+        video.addEventListener("loadeddata", function() {
+            getImage();
+        }, false);
+
+    })();
+</script>

@@ -1,0 +1,54 @@
+<h1>This is a test for creating TV noise in HTML5's canvas</h1>
+<canvas id="canvas" width="640" height="480"></canvas>
+<script>
+(function() {
+
+var canvas = document.querySelector('#canvas');
+var v=0;
+
+function getImage(){
+
+    var i, r, g, b, a;
+
+    var width = canvas.width,
+        height = canvas.height;
+
+    var context = canvas.getContext('2d');
+
+    /* Block for modify content */
+
+    var frame = context.createImageData(width,height);
+    var l = frame.data.length / 4;
+
+//    console.log(frame.data);
+    for (i = 0; i < l; i++) {
+//        r = frame.data[i * 4 + 0];
+//        g = frame.data[i * 4 + 1];
+//        b = frame.data[i * 4 + 2];
+//        a = frame.data[i * 4 + 3];
+
+        var r16 = Math.floor(Math.random()*1000 % 17);
+//        console.log(r16);
+//        if(r16<40) r16 = 40;
+        if(r16>255) r16 = 255;
+
+        frame.data[i * 4 + 0] = r16;
+        frame.data[i * 4 + 1] = r16;
+        frame.data[i * 4 + 2] = r16;
+        frame.data[i * 4 + 3] = 255;
+    }
+
+    context.putImageData(frame, 0, 0);
+
+//    console.log(v++);
+
+    setTimeout(function () {
+        getImage();
+    }, 0);
+
+}
+
+getImage();
+
+})();
+</script>

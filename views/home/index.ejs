@@ -1,0 +1,50 @@
+<div id="container">
+    <h1>Welcome to the Malledi config file creator!</h1>
+    <form ng-controller="formCtrl" ng-init="start()" method="post" action="/">
+        <div class="field">
+            <label for="project-name">Project Name: </label>
+            <input id="project-name" name="project_name" type="text" ng-model="form.projectName" />
+        </div>
+        <div class="field">
+            <label for="mode">Mode: </label>
+            <input id="mode" name="mode" type="radio" value="execution" ng-model="form.mode" />Execution
+            <input id="mode" name="mode" type="radio" value="graphic" ng-model="form.mode" />Visualization
+        </div>
+        <div class="field">
+            <label for="program">Analysis program: </label>
+            <input id="program" name="program" type="radio" value="ptlush" ng-model="form.program" />PTLUSH
+            <input id="program" name="program" type="radio" value="plush" ng-model="form.program" />PLUSH
+        </div>
+        <div class="field">
+            <label for="axis">Analysis axis: </label>
+            <input id="axis" name="axis" type="radio" value="x" ng-model="form.axis" />x
+            <input id="axis" name="axis" type="radio" value="y" ng-model="form.axis" />y
+        </div>
+        <div class="field">
+            <label for="x-axis">X-axis: </label>
+            <textarea name="x-axis" id="x-axis" cols="30" rows="10"></textarea>
+        </div>
+        <div class="field">
+            <label for="y-axis">Y-axis: </label>
+            <textarea name="y-axis" id="y-axis" cols="30" rows="10"></textarea>
+        </div>
+        <div class="field">
+            <label for="z-axis">Z-axis: </label>
+            <textarea name="z-axis" id="z-axis" cols="30" rows="10"></textarea>
+        </div>
+        <div class="group">
+            <h3 class="group-title">Diagrama de pisos</h3>
+            <floorfield ng-repeat="floor in form.floormap"></floorfield>
+            <input type="button" value="Agregar piso" ng-click="addFloor()">
+        </div>
+        <div class="field">
+            <input type="button" value="Crear archivo JSON" ng-click="createJSON()"/>
+            <input type="button" value="Crear archivo .dat" />
+            <input type="button" value="Actualizar modelo" />
+        </div>
+
+        <div id="webGLContainer" ng-controller="webGLCtrl">
+        </div>
+
+    </form>
+</div>
