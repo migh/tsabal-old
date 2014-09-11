@@ -38,12 +38,6 @@ module.exports.routes = {
   'post /malledim/create': 'MainController.createJSON',
   '/model': {
     view: 'home/model'
-  },
-  '/tests/video':{
-    view: 'tests/video'
-  },
-  '/tests/noise':{
-    view: 'tests/canvasnoise'
   }
 
   /*
