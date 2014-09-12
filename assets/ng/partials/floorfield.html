@@ -1,9 +1,10 @@
-<div class="field">
-    <label for="floorMapX">X:</label>
-    <input id="floorMapX" name="floorMapX" type="text" ng-model="form.blah" />
-    <label for="floorMapY">Y:</label>
-    <input id="floorMapY" name="floorMapY" type="text" ng-model="form.blah" />
-    <label for="floorNumber">Número de pisos:</label>
-    <input id="floorNumber" name="floorNumber" type="text" ng-model="form.floors" />
+<fieldset>
+    <label for="floorMapX" class="inline">X:</label>
+    <input id="floorMapX" class="xnarrow input" name="floorMapX" type="text" ng-model="form.blah" />
+    <label for="floorMapY" class="inline">Y:</label>
+    <input id="floorMapY" class="xnarrow input" name="floorMapY" type="text" ng-model="form.blah" />
+    <label for="floorNumber" class="inline">Número de pisos:</label>
+    <input id="floorNumber" class="xnarrow input" name="floorNumber" type="text" ng-model="form.floors" />
     <input type="button" value="Borrar piso" ng-click="removeFloor()"/>
-</div>
+    </div>
+</fieldset>

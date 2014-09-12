@@ -113,8 +113,8 @@
                 renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
                 // attach div element to variable to contain the renderer
-                container = document.getElementById( 'container' );
-                container.appendChild( renderer.domElement );
+                container = document.getElementById( 'webGLContainer' );
+                container.insertBefore( renderer.domElement , document.getElementById('updateModelButton') );
 
                 // automatically resize renderer
                 THREEx.WindowResize(renderer, camera);
@@ -248,8 +248,37 @@
                 form.projectName = 'Proyecto 001';
                 form.mode = 'execution';
                 form.program = 'ptlush';
-                form.axis = 'y';
+                form.axis = 'Y';
+                form.strata = 10;
                 form.floormap = [ 1, 2, 3];
+            }
+
+            /**
+             * Change Internal Object to External JSON object for processing
+             * @param {Object} iModel - Angular's form model
+             * @return {Object} oModel - Malledi's modeling file
+             */
+
+            function createJSON(iModel){
+                var oModel = {
+                    name: '',
+                    config: {},
+                    model: {}
+                };
+
+                oModel.name = iModel.projectName;
+                oModel.config.mode = iModel.mode;
+                oModel.config.program = iModel.program;
+                oModel.config.axis = iModel.axis;
+                oModel.model.xAxis = iModel.xAxis;
+                oModel.model.yAxis = iModel.yAxis;
+                oModel.model.zAxis = iModel.zAxis;
+                oModel.model.soil = {};
+                oModel.model.soil.strata = iModel.strata;
+                oModel.model.structure = {};
+                oModel.model.structure.floorMap = {};
+
+                return oModel;
             }
 
             s.addFloor = function(){
@@ -260,8 +289,8 @@
                 form.floormap.pop();
             }
 
-            s.createJSON = function (){
-                var content = JSON.stringify(s.form);
+            s.saveAsJSON = function (){
+                var content = JSON.stringify(createJSON(s.form));
 
                 var textFileAsBlob = new Blob([content], {type:'application/json'});
 

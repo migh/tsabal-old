@@ -1,49 +1,68 @@
 <div id="container">
     <h1>Welcome to the Malledi config file creator!</h1>
+
+    <div id="webGLContainer" ng-controller="webGLCtrl">
+        <input id="updateModelButton" type="button" value="Actualizar modelo" class="medium pretty btn default" />
+    </div>
+
     <form ng-controller="formCtrl" ng-init="start()" method="post" action="/">
         <div class="field">
-            <label for="project-name">Project Name: </label>
-            <input id="project-name" name="project_name" type="text" ng-model="form.projectName" />
+            <label for="project-name" class="inline">Project Name: </label>
+            <i class="icon-help"></i>
+            <input id="project-name" name="project_name" type="text" class="wide input" ng-model="form.projectName" />
         </div>
         <div class="field">
-            <label for="mode">Mode: </label>
-            <input id="mode" name="mode" type="radio" value="execution" ng-model="form.mode" />Execution
-            <input id="mode" name="mode" type="radio" value="graphic" ng-model="form.mode" />Visualization
+            <p>Mode: <i class="icon-help"></i></p>
+            <label for="mode1" class="inline">
+                <input id="mode1" name="mode" type="radio" value="execution" ng-model="form.mode" />Execution
+            </label>
+            <label for="mode2" class="inline">
+                <input id="mode2" class="radio" name="mode" type="radio" value="graphic" ng-model="form.mode" />Visualization
+            </label>
         </div>
         <div class="field">
-            <label for="program">Analysis program: </label>
-            <input id="program" name="program" type="radio" value="ptlush" ng-model="form.program" />PTLUSH
-            <input id="program" name="program" type="radio" value="plush" ng-model="form.program" />PLUSH
+            <p>Analysis program: <i class="icon-help"></i></p>
+            <label for="program1" class="inline">
+                <input id="program1" name="program" type="radio" value="ptlush" ng-model="form.program" />PTLUSH
+            </label>
+            <label for="program2" class="inline">
+                <input id="program2" name="program" type="radio" value="plush" ng-model="form.program" />PLUSH
+            </label>
         </div>
         <div class="field">
-            <label for="axis">Analysis axis: </label>
-            <input id="axis" name="axis" type="radio" value="x" ng-model="form.axis" />x
-            <input id="axis" name="axis" type="radio" value="y" ng-model="form.axis" />y
+            <p>Analysis axis: <i class="icon-help"></i></p>
+            <label for="axis1" class="inline">
+                <input id="axis1" name="axis" type="radio" value="X" ng-model="form.axis" />x
+            </label>
+            <label for="axis2" class="inline">
+                <input id="axis2" name="axis" type="radio" value="Y" ng-model="form.axis" />y
+            </label>
+        </div>
+        <div class="field">
+            <label for="strata" class="inline">Soil strata: </label>
+            <i class="icon-help"></i>
+            <input id="strata" name="strata" type="text" class="xnarrow input" ng-model="form.strata" />
         </div>
         <div class="field">
             <label for="x-axis">X-axis: </label>
-            <textarea name="x-axis" id="x-axis" cols="30" rows="10"></textarea>
+            <textarea name="x-axis" id="x-axis" rows="2" class="input textarea" ng-model="form.xAxis"></textarea>
         </div>
         <div class="field">
             <label for="y-axis">Y-axis: </label>
-            <textarea name="y-axis" id="y-axis" cols="30" rows="10"></textarea>
+            <textarea name="y-axis" id="y-axis" rows="2" class="input textarea" ng-model="form.yAxis"></textarea>
         </div>
         <div class="field">
             <label for="z-axis">Z-axis: </label>
-            <textarea name="z-axis" id="z-axis" cols="30" rows="10"></textarea>
+            <textarea name="z-axis" id="z-axis" rows="2" class="input textarea" ng-model="form.zAxis"></textarea>
         </div>
-        <div class="group">
+        <fieldset>
             <h3 class="group-title">Diagrama de pisos</h3>
             <floorfield ng-repeat="floor in form.floormap"></floorfield>
-            <input type="button" value="Agregar piso" ng-click="addFloor()">
-        </div>
-        <div class="field">
-            <input type="button" value="Crear archivo JSON" ng-click="createJSON()"/>
-            <input type="button" value="Crear archivo .dat" />
-            <input type="button" value="Actualizar modelo" />
-        </div>
-
-        <div id="webGLContainer" ng-controller="webGLCtrl">
+            <input type="button" value="Agregar piso" class="medium pretty btn default" ng-click="addFloor()">
+        </fieldset>
+        <div class="group">
+            <input type="button" value="Crear archivo JSON" class="medium pretty btn default" ng-click="saveAsJSON()"/>
+            <input type="button" value="Crear archivo .dat" class="medium pretty btn default" />
         </div>
 
     </form>
