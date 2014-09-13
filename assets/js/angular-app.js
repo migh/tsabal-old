@@ -250,7 +250,7 @@
                 form.program = 'ptlush';
                 form.axis = 'Y';
                 form.strata = 10;
-                form.floormap = [ 1, 2, 3];
+                form.floormap = [];
             }
 
             /**
@@ -276,21 +276,21 @@
                 oModel.model.soil = {};
                 oModel.model.soil.strata = iModel.strata;
                 oModel.model.structure = {};
-                oModel.model.structure.floorMap = {};
+                oModel.model.structure.floorMap = iModel.floormap;
 
                 return oModel;
             }
 
             s.addFloor = function(){
-                form.floormap.push({});
+                form.floormap.push({coords:{x:0,y:0},floors:0});
             }
 
-            s.removeFloor = function(){
-                form.floormap.pop();
+            s.removeFloor = function(index){
+                form.floormap.splice(index,1);
             }
 
             s.saveAsJSON = function (){
-                var content = JSON.stringify(createJSON(s.form));
+                var content = angular.toJson(createJSON(s.form));
 
                 var textFileAsBlob = new Blob([content], {type:'application/json'});
 
