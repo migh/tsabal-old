@@ -27,9 +27,9 @@ module.exports = {
   _config: {},
 
   index: function(req,res){
-      if(Object.keys(req.body).length != 0){
-          console.log(req.body);
-      }
+      // if(Object.keys(req.body).length != 0){
+      //     console.log(req.body);
+      // }
       res.view(null,{
           title: 'Tsabal :: Home',
           webGL: true
