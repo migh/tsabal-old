@@ -4,6 +4,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@import url(../../bower_components/tether/dist/css/tether.min.css);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -4663,8 +4664,9 @@ h1 {
   font-size: 3rem; }
 
 #container {
+  width: 800px;
   border: 1px solid yellow;
-  background-color: #cfcfcf;
+  background-color: white;
   color: black; }
 
 #webGLContainer {
