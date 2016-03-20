@@ -14,8 +14,9 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.2.21",
-    "gumby": "~2.6.3",
-    "threejs": "*"
+    "angular": "^1.5.2",
+    "three.js": "threejs#*",
+    "bootstrap": "v4.0.0-alpha.2",
+    "tether": "^1.2.0"
   }
 }
